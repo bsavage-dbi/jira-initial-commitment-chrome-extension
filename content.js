@@ -1,9 +1,13 @@
 var JIRAInitialCommitment = JIRAInitialCommitment || (function() {
 
+  var getParameters = window.location.search;
+  var initTimeout;
+
   function init() {
     $(document).ready(function() {
       // add mark to JIRA items that map the initial commitment
-      setTimeout(function() {
+      initTimeout = setTimeout(function() {
+        $(".edit-initial-commitment-link, .set-initial-commitment-link").remove();
         $(".ghx-sprint-meta").prepend('<a href="#" class="edit-initial-commitment-link" style="margin-right: 10px;">Edit IC</a>');
         $(".ghx-sprint-meta").prepend('<a href="#" class="set-initial-commitment-link" style="margin-right: 10px;">Set IC</a>');
 
@@ -37,6 +41,14 @@ var JIRAInitialCommitment = JIRAInitialCommitment || (function() {
       }, 1000);
     });
   };
+
+  setInterval(function() {
+    if (getParameters != window.location.search) {
+      clearTimeout(initTimeout);
+      initTimeout = init();
+      getParameters = window.location.search;
+    }
+  }, 1000);
 
   function markItems() {
     // always start clean

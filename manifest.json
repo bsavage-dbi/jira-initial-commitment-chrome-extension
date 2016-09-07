@@ -3,7 +3,7 @@
 
   "name": "JIRA Initial Commitment Highlighter",
   "description": "If you have trouble differentiating between initial commitment and extra work during a sprint, this extension should come in handy.",
-  "version": "1.0",
+  "version": "1.1",
 
   "browser_action": {
     "default_icon": "icon.png"
